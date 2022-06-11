@@ -50,18 +50,12 @@
 			}
 			var minv = Math.min.apply(null, values);
 			var maxv = Math.max.apply(null, values);
-			if(minv<0){
-				minv = -minv;
-				maxv += minv;
-				for(k in this.data){
-					this.data[k][dst_key] = this.data[k][src_key]+minv;
-				}
-			}else{
-				for(k in this.data){
-					this.data[k][dst_key] = this.data[k][src_key];
-				}
+
+			for(k in this.data){
+				this.data[k][dst_key] = (this.data[k][src_key] - minv) / (maxv - minv);
 			}
-			this.maxv = maxv;
+			
+			this.maxv = 1;
 		}
 
 		this.proc = function(op){
